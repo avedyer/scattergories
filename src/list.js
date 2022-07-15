@@ -1,4 +1,4 @@
-export default List = () => {
+export default function List(props) {
   return (
     <div id='list'>
       
