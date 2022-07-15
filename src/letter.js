@@ -11,7 +11,7 @@ export default function Letter() {
   return (
     <div id='letter'>
       <button id='reroll' onClick={() => setLetter(randomLetter())}/>
-      <span>{letter}</span>
+      <span className='display'>{letter}</span>
     </div>
   )
 }
