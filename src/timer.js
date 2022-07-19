@@ -71,14 +71,14 @@ export default function Timer() {
   return (
     <div id='timer'>
       {editing ? 
-      <input type='text' id='time-input' onKeyUp={(e) => handleInput(e)} onChange={(e) => updateTime(e)} onSubmit={() => setEditing(false)} value={time}></input>
+      <input type='text' id='time-input' onKeyUp={(e) => handleInput(e)} onChange={(e) => updateTime(e)} value={time} />
       :
       <span className='display' onClick={(e) => {
         if (!playing) {
           setEditing(true); 
           e.stopPropagation();
         }}}>
-          {time}
+        {time}
       </span>
       }
       <button className='incrementer' disabled={playing} onClick={() => {setDefaultTime(time - 1)}}>-</button>

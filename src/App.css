@@ -40,3 +40,7 @@ main {
 #categories {
   grid-area: categories;
 }
+
+.excluded {
+  color: red
+}
