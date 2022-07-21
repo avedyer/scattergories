@@ -15,6 +15,17 @@ export default function List(props) {
     }
   }, [props.fullList , categoryList])
 
+  useEffect(() => {
+    let newArr = [...categoryList]
+
+    while (newArr.length > categoryCount) {
+      newArr.pop()
+    }
+
+    setCategoryList([...newArr])
+    
+  }, [categoryCount])
+
   function randomCategory() {
 
     let newCategory = props.fullList[Math.floor(Math.random() * props.fullList.length)]
@@ -27,6 +38,10 @@ export default function List(props) {
 
   return (
     <div id='list-container'>
+      <div className='incrementers'>
+        <button disabled={props.playing} onClick={() => setCategoryCount(categoryCount > 5 ? categoryCount - 1 : 5)}>-</button>
+        <button disabled={props.playing} onClick={() => setCategoryCount(categoryCount < 20 ? categoryCount + 1 : 20)}>+</button>
+      </div>
       <div id='list'>
         {categoryList.map((category) => 
           <p>{category}</p>

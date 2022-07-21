@@ -81,8 +81,10 @@ export default function Timer() {
         {time}
       </span>
       }
-      <button className='incrementer' disabled={playing} onClick={() => {setDefaultTime(time - 1)}}>-</button>
-      <button className='incrementer' disabled={playing} onClick={() => {setDefaultTime(time + 1)}}>+</button>
+      <div className='incrementers'>
+        <button disabled={playing} onClick={() => {setDefaultTime(time - 1)}}>-</button>
+        <button disabled={playing} onClick={() => {setDefaultTime(time + 1)}}>+</button>
+      </div>
       <button className='play' disabled={editing} onClick={() => setPlaying(!playing)}>{playing ? 'pause' : 'play'}</button>
     </div>
   )
