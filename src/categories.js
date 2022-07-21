@@ -9,7 +9,6 @@ export default function Categories(props) {
 
   const [editing, setEditing] = useState(false)
   const [fullList, setFullList] = useState([])
-  const [exclusions, setExclusions] = useState([])
 
   useEffect(() => {
     if (fullList.length === 0) {
@@ -41,6 +40,11 @@ export default function Categories(props) {
     }
   }
 
+  function removeCategory(category) {
+    let newArr = fullList.filter((value) => value !== category);
+    setFullList([...newArr])
+  }
+
   return (
     <div id='categories'>
       <div className='tabs'>
@@ -49,9 +53,9 @@ export default function Categories(props) {
       </div>
       {
         editing ?
-        <Editor exclusions={exclusions} fullList={fullList} passNewCategory={addCategory}/>
+        <Editor fullList={fullList} passRemovedCategory={removeCategory} passNewCategory={addCategory}/>
         :
-        <List exclusions={exclusions} fullList={fullList} />
+        <List fullList={fullList} />
       }
     </div>
   )

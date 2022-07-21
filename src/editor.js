@@ -10,7 +10,10 @@ export default function Editor(props) {
       <button onClick={() => props.passNewCategory(newCategory)}>Add</button>
       {
         props.fullList.map((category) => 
-          <p>{category}</p>
+          <div className='category-container'>
+            <p>{category}</p>
+            <button onClick={() => props.passRemovedCategory(category)}>-</button>
+          </div>
         )
       }
     </div>

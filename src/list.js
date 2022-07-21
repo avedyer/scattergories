@@ -19,7 +19,7 @@ export default function List(props) {
 
     let newCategory = props.fullList[Math.floor(Math.random() * props.fullList.length)]
     
-    if (props.exclusions.includes(newCategory) || categoryList.includes(newCategory)) {
+    if (categoryList.includes(newCategory)) {
       return randomCategory()
     }
     return newCategory
