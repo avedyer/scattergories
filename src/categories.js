@@ -8,7 +8,8 @@ import prompts from './prompts.txt'
 export default function Categories(props) {
 
   const [editing, setEditing] = useState(false)
-  const [fullList, setfullList] = useState([])
+  const [fullList, setFullList] = useState([])
+  const [exclusions, setExclusions] = useState([])
 
   useEffect(() => {
     if (fullList.length === 0) {
@@ -27,21 +28,31 @@ export default function Categories(props) {
           }
         }
         newArr.push(queuedPrompt)
-        setfullList([...newArr])
+        setFullList([...newArr])
       });
     }
   }, [])
 
-  if (!editing) {
-    return (
-      <div id='categories'>
-        <List fullList={fullList}/>  
-      </div>
-    )
+  function addCategory(category) {
+    if (!fullList.includes(category)) {
+      let newArr = [...fullList]
+      newArr.push(category)
+      setFullList([...newArr])
+    }
   }
-  else {
+
+  return (
     <div id='categories'>
-      <Editor fullList={fullList}/>
+      <div className='tabs'>
+        <button onClick={() => setEditing(false)}>Categories</button>
+        <button onClick={() => setEditing(true)}>Edit List</button>
+      </div>
+      {
+        editing ?
+        <Editor exclusions={exclusions} fullList={fullList} passNewCategory={addCategory}/>
+        :
+        <List exclusions={exclusions} fullList={fullList} />
+      }
     </div>
-  }
+  )
 }
