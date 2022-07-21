@@ -4,11 +4,12 @@ export default function Timer(props) {
 
   const [defaultTime, setDefaultTime] = useState(180)
   const [time, setTime] = useState(defaultTime)
+  const [timeInput, setTimeInput] = useState()
   const [newTime,setNewTime] = useState(time)
   const [playing, setPlaying] = useState(false)
   const [editing, setEditing] = useState(false)
   const [automaticIncrement, setautomaticIncrement] = useState(0)
-  const [incrementSpeed, setIncrementSpeed] = useState(100)
+  const [incrementSpeed, setIncrementSpeed] = useState(1000)
 
   useEffect(() => {
     if (playing && newTime > 0) {
@@ -18,6 +19,12 @@ export default function Timer(props) {
       }, 1000);
     }
   }, [playing, time])
+
+  useEffect(() => {
+    if (playing && time === 0) {
+      setNewTime(defaultTime)
+    }
+  }, [playing])
 
   useEffect(() => {
     //Set displayed time to queued time if game has not been paused
@@ -37,6 +44,7 @@ export default function Timer(props) {
 
   useEffect(() => {
     setTime(defaultTime)
+    setTimeInput(defaultTime)
   }, [defaultTime])
 
   useEffect(() => {
@@ -45,11 +53,17 @@ export default function Timer(props) {
     }
     else {
       window.removeEventListener('click', closeInput)
+      if (timeInput) {
+        setDefaultTime(timeInput)
+      }
+      else {
+        setTimeInput(defaultTime)
+      }
     }
   }, [editing])
 
   useEffect(() => {
-    if (defaultTime > 0 && automaticIncrement !== 0) {
+    if (defaultTime > 1 && defaultTime < 999 && automaticIncrement !== 0) {
       setTimeout(() => {
         setDefaultTime(defaultTime + automaticIncrement)
       }, incrementSpeed);
@@ -58,6 +72,9 @@ export default function Timer(props) {
 
   useEffect(() => {
     if (automaticIncrement !== 0) {
+      setTimeout(() => {
+        setIncrementSpeed(100)
+      }, 700)
       setTimeout(() => {
         setIncrementSpeed(80)
       }, 1400)
@@ -69,25 +86,34 @@ export default function Timer(props) {
       }, 2800)
     }
     else {
-      setIncrementSpeed(100)
+      setIncrementSpeed(1000)
     }
   }, [automaticIncrement])
 
   useEffect(() => {
+    if (automaticIncrement === 0) {
+      setIncrementSpeed(1000)
+    }
+  }, [incrementSpeed])
+
+  useEffect(() => {
     props.passPlaying(playing)
+    if (time === 0 && playing) {
+      setTime(defaultTime)
+    }
   }, [playing])
 
   function updateTime(e) {
-    console.log(e)
     const re = /^[0-9\b]+$/;
-    if (e.target.value === '' || re.test(e.target.value)) {
-      setTime(e.target.value)
+    if (re.test(e.target.value) && e.target.value.length < 4 || !e.target.value) {
+      setTimeInput(e.target.value)
     }
   }
 
   function handleInput(e) {
     if (e.key === 'Enter') {
       setEditing(false)
+      updateTime(e)
     }
   }
 
@@ -96,13 +122,13 @@ export default function Timer(props) {
       if (!document.getElementById('time-input').contains(e.target)){
         setEditing(false)
       } 
-    } 
+    }
   }
 
   return (
     <div id='timer'>
       {editing ? 
-      <input type='text' id='time-input' onKeyUp={(e) => handleInput(e)} onChange={(e) => updateTime(e)} value={time} />
+      <input type='text' id='time-input' onKeyUp={(e) => handleInput(e)} onChange={(e) => updateTime(e)} value={timeInput} />
       :
       <span className='display' onClick={(e) => {
         if (!playing) {
@@ -113,25 +139,21 @@ export default function Timer(props) {
       </span>
       }
       <div className='incrementers'>
-        <button disabled={playing} 
-          onMouseDown={() => {
-            setTimeout(() => {
-              setautomaticIncrement(-1)
-            }, 700)
-          }} 
+        <button disabled={playing || time === 1} 
+          onMouseDown={() => setautomaticIncrement(-1)}
           onMouseUp={() => setautomaticIncrement(0)} 
-          onClick={() => {setDefaultTime(time - 1)
+          onClick={() => {
+            setautomaticIncrement(0)
+            setDefaultTime(time - 1)
           }}>
             -
         </button>
-        <button disabled={playing} 
-          onMouseDown={() => {
-            setTimeout(() => {
-              setautomaticIncrement(1)
-            }, 700)
-          }}
+        <button disabled={playing || time > 998} 
+          onMouseDown={() => setautomaticIncrement(1)}
           onMouseUp={() => setautomaticIncrement(0)} 
-          onClick={() => {setDefaultTime(time + 1)
+          onClick={() => {
+            setautomaticIncrement(0)
+            setDefaultTime(time + 1)
           }}>
             +
         </button>
