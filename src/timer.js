@@ -7,6 +7,8 @@ export default function Timer(props) {
   const [newTime,setNewTime] = useState(time)
   const [playing, setPlaying] = useState(false)
   const [editing, setEditing] = useState(false)
+  const [automaticIncrement, setautomaticIncrement] = useState(0)
+  const [incrementSpeed, setIncrementSpeed] = useState(100)
 
   useEffect(() => {
     if (playing && newTime > 0) {
@@ -45,6 +47,31 @@ export default function Timer(props) {
       window.removeEventListener('click', closeInput)
     }
   }, [editing])
+
+  useEffect(() => {
+    if (defaultTime > 0 && automaticIncrement !== 0) {
+      setTimeout(() => {
+        setDefaultTime(defaultTime + automaticIncrement)
+      }, incrementSpeed);
+    }
+  }, [automaticIncrement, defaultTime])
+
+  useEffect(() => {
+    if (automaticIncrement !== 0) {
+      setTimeout(() => {
+        setIncrementSpeed(80)
+      }, 1400)
+      setTimeout(() => {
+        setIncrementSpeed(50)
+      }, 2100)
+      setTimeout(() => {
+        setIncrementSpeed(30)
+      }, 2800)
+    }
+    else {
+      setIncrementSpeed(100)
+    }
+  }, [automaticIncrement])
 
   useEffect(() => {
     props.passPlaying(playing)
@@ -86,8 +113,28 @@ export default function Timer(props) {
       </span>
       }
       <div className='incrementers'>
-        <button disabled={playing} onClick={() => {setDefaultTime(time - 1)}}>-</button>
-        <button disabled={playing} onClick={() => {setDefaultTime(time + 1)}}>+</button>
+        <button disabled={playing} 
+          onMouseDown={() => {
+            setTimeout(() => {
+              setautomaticIncrement(-1)
+            }, 700)
+          }} 
+          onMouseUp={() => setautomaticIncrement(0)} 
+          onClick={() => {setDefaultTime(time - 1)
+          }}>
+            -
+        </button>
+        <button disabled={playing} 
+          onMouseDown={() => {
+            setTimeout(() => {
+              setautomaticIncrement(1)
+            }, 700)
+          }}
+          onMouseUp={() => setautomaticIncrement(0)} 
+          onClick={() => {setDefaultTime(time + 1)
+          }}>
+            +
+        </button>
       </div>
       <button className='play' disabled={editing || props.listEditing} onClick={() => setPlaying(!playing)}>{playing ? 'pause' : 'play'}</button>
     </div>
