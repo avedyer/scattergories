@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 
-export default function Timer() {
+export default function Timer(props) {
 
   const [defaultTime, setDefaultTime] = useState(180)
   const [time, setTime] = useState(defaultTime)
   const [newTime,setNewTime] = useState(time)
   const [playing, setPlaying] = useState(false)
-  const [editing, setEditing] = useState(true)
+  const [editing, setEditing] = useState(false)
 
   useEffect(() => {
     if (playing && newTime > 0) {
@@ -45,6 +45,10 @@ export default function Timer() {
       window.removeEventListener('click', closeInput)
     }
   }, [editing])
+
+  useEffect(() => {
+    props.passPlaying(playing)
+  }, [playing])
 
   function updateTime(e) {
     console.log(e)
@@ -85,7 +89,7 @@ export default function Timer() {
         <button disabled={playing} onClick={() => {setDefaultTime(time - 1)}}>-</button>
         <button disabled={playing} onClick={() => {setDefaultTime(time + 1)}}>+</button>
       </div>
-      <button className='play' disabled={editing} onClick={() => setPlaying(!playing)}>{playing ? 'pause' : 'play'}</button>
+      <button className='play' disabled={editing || props.listEditing} onClick={() => setPlaying(!playing)}>{playing ? 'pause' : 'play'}</button>
     </div>
   )
 }

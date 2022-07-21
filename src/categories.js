@@ -32,6 +32,10 @@ export default function Categories(props) {
     }
   }, [])
 
+  useEffect(() => {
+    props.passEditing(editing)
+  }, [editing])
+
   function addCategory(category) {
     if (!fullList.includes(category)) {
       let newArr = [...fullList]
@@ -48,14 +52,14 @@ export default function Categories(props) {
   return (
     <div id='categories'>
       <div className='tabs'>
-        <button onClick={() => setEditing(false)}>Categories</button>
-        <button onClick={() => setEditing(true)}>Edit List</button>
+        <button disabled={props.playing} onClick={() => setEditing(false)}>Categories</button>
+        <button disabled={props.playing} onClick={() => setEditing(true)}>Edit List</button>
       </div>
       {
         editing ?
-        <Editor fullList={fullList} passRemovedCategory={removeCategory} passNewCategory={addCategory}/>
+        <Editor fullList={fullList} passEditing={setEditing} passRemovedCategory={removeCategory} passNewCategory={addCategory}/>
         :
-        <List fullList={fullList} />
+        <List playing={props.playing} fullList={fullList} />
       }
     </div>
   )
