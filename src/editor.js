@@ -9,8 +9,8 @@ export default function Editor(props) {
       <input type='text' onChange={(e) => setNewCategory(e.target.value)}/>
       <button onClick={() => props.passNewCategory(newCategory)}>Add</button>
       {
-        props.fullList.map((prompt) => 
-          <p>{prompt}</p>
+        props.fullList.map((category) => 
+          <p>{category}</p>
         )
       }
     </div>

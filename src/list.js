@@ -4,36 +4,35 @@ import { useEffect, useState } from 'react';
 export default function List(props) {
 
   
-  const [promptList, setPromptList] = useState([])
-  const [promptCount, setPromptCount] = useState(10)
-  const [exclusions, setExclusions] = useState([])
+  const [categoryList, setCategoryList] = useState([])
+  const [categoryCount, setCategoryCount] = useState(10)
 
   useEffect(() => {
-    if (promptList.length < promptCount && props.fullList.length > 0) {
-      let newArr = [...promptList]
-      newArr.push(randomPrompt())
-      setPromptList([...newArr])
+    if (categoryList.length < categoryCount && props.fullList.length > 0) {
+      let newArr = [...categoryList]
+      newArr.push(randomCategory())
+      setCategoryList([...newArr])
     }
-  }, [props.fullList , promptList])
+  }, [props.fullList , categoryList])
 
-  function randomPrompt() {
+  function randomCategory() {
 
-    let newPrompt = props.fullList[Math.floor(Math.random() * props.fullList.length)]
+    let newCategory = props.fullList[Math.floor(Math.random() * props.fullList.length)]
     
-    if (exclusions.includes(newPrompt) || promptList.includes(newPrompt)) {
-      return randomPrompt()
+    if (props.exclusions.includes(newCategory) || categoryList.includes(newCategory)) {
+      return randomCategory()
     }
-    return newPrompt
+    return newCategory
   }
 
   return (
     <div id='list-container'>
       <div id='list'>
-        {promptList.map((prompt) => 
-          <p>{prompt}</p>
+        {categoryList.map((category) => 
+          <p>{category}</p>
         )}
       </div>
-      <button onClick={() => setPromptList([])} />
+      <button onClick={() => setCategoryList([])} />
     </div>
   )
 }

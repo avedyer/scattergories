@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import List from "./list"
 import Editor from './editor'
 
-import prompts from './prompts.txt'
+import categories from './categories.txt'
 
 export default function Categories(props) {
 
@@ -13,21 +13,21 @@ export default function Categories(props) {
 
   useEffect(() => {
     if (fullList.length === 0) {
-      fetch(prompts)
+      fetch(categories)
       .then(r => r.text())
       .then(text => {
         let newArr = []
-        let queuedPrompt = ''
+        let queuedCategory = ''
         for (let i=0; i<text.length; ++i) {
           if (text[i] !== ',') {
-            queuedPrompt += text[i]
+            queuedCategory += text[i]
           }
           else {
-            newArr.push(queuedPrompt)
-            queuedPrompt = ''
+            newArr.push(queuedCategory)
+            queuedCategory = ''
           }
         }
-        newArr.push(queuedPrompt)
+        newArr.push(queuedCategory)
         setFullList([...newArr])
       });
     }
