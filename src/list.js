@@ -38,9 +38,12 @@ export default function List(props) {
 
   return (
     <div id='list-container'>
-      <div className='incrementers'>
-        <button disabled={props.playing} onClick={() => setCategoryCount(categoryCount > 5 ? categoryCount - 1 : 5)}>-</button>
-        <button disabled={props.playing} onClick={() => setCategoryCount(categoryCount < 20 ? categoryCount + 1 : 20)}>+</button>
+      <div id='quantity-display'>
+        <span id='quantity'>{categoryCount}</span>
+        <div className='incrementers'>
+          <button disabled={props.playing || categoryCount < 6} onClick={() => setCategoryCount(categoryCount - 1)}>-</button>
+          <button disabled={props.playing || categoryCount > 19} onClick={() => setCategoryCount(categoryCount + 1)}>+</button>
+        </div>
       </div>
       <div id='list'>
         {categoryList.map((category) => 
