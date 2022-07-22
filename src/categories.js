@@ -9,28 +9,43 @@ export default function Categories(props) {
 
   const [editing, setEditing] = useState(false)
   const [fullList, setFullList] = useState([])
+  const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
     if (fullList.length === 0) {
-      fetch(categories)
-      .then(r => r.text())
-      .then(text => {
-        let newArr = []
-        let queuedCategory = ''
-        for (let i=0; i<text.length; ++i) {
-          if (text[i] !== ',') {
-            queuedCategory += text[i]
+      if (JSON.parse(localStorage.getItem('categories'))){
+        setFullList(JSON.parse(localStorage.getItem('categories')))
+      }
+      else {
+        fetch(categories)
+        .then(r => r.text())
+        .then(text => {
+          let newArr = []
+          let queuedCategory = ''
+          for (let i=0; i<text.length; ++i) {
+            if (text[i] !== ',') {
+              queuedCategory += text[i]
+            }
+            else {
+              newArr.push(queuedCategory)
+              queuedCategory = ''
+            }
           }
-          else {
-            newArr.push(queuedCategory)
-            queuedCategory = ''
-          }
-        }
-        newArr.push(queuedCategory)
-        setFullList([...newArr])
-      });
+          newArr.push(queuedCategory)
+          setFullList([...newArr])
+        });
+      }
     }
   }, [])
+
+  useEffect(() => {
+    if (initialized) {
+      localStorage.setItem('categories', JSON.stringify(fullList))
+    } 
+    else if (fullList.length > 0) {
+      setInitialized(true)
+    }
+  }, [fullList])
 
   useEffect(() => {
     props.passEditing(editing)
