@@ -1,14 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Cousine&family=Open+Sans&display=swap');
+
 body, #root, .App {
   width: 100vw;
   height: 100vh;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 0px;
+  font-size: 22px;
+}
+
+button {
+  background: none;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+button:hover {
+  text-decoration: underline;
 }
 
 .App {
   padding: 16px 48px;
   display: grid;
-  grid-template-rows: auto 64px;
+  grid-template-rows: calc(100% - 64px) 64px;
 }
 
 .App > * {
@@ -16,7 +33,7 @@ body, #root, .App {
 }
 
 main > * {
-  border: 5px solid black;
+  border: 3px solid black;
 }
 
 main {
@@ -29,8 +46,42 @@ main {
   "timer categories";
 }
 
+footer {
+  height: 86px;
+}
+
 #letter {
   grid-area: letter;
+  position: relative;
+}
+
+#letter .display {
+  font-family: 'Cousine';
+  font-size: 128px;
+  margin: 12px;
+}
+
+#letter #exclusions {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  bottom: 12px;
+}
+
+#letter #exclusions > * {
+  margin: 4px;
+  cursor: pointer;
+}
+
+.excluded {
+  text-decoration: line-through;
+  color: hsl(0, 0%, 80%)
+}
+
+#reroll {
+  font-size: 64px;
+  position: absolute;
+  right: 12px;
 }
 
 #timer {
@@ -39,8 +90,4 @@ main {
 
 #categories {
   grid-area: categories;
-}
-
-.excluded {
-  color: red
 }

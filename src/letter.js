@@ -8,6 +8,12 @@ export default function Letter() {
   const [firstLetter, setFirstLetter] = useState()
 
   useEffect(() => {
+    if (exclusions.length === 0 && JSON.parse(localStorage.getItem('exclusions')).length > 0) {
+      setExclusions(JSON.parse(localStorage.getItem('exclusions')))
+    }
+  }, [exclusions])
+
+  useEffect(() => {
     if (!firstLetter) {
       setFirstLetter(randomLetter())
     }
@@ -36,18 +42,20 @@ export default function Letter() {
     if (exclusions.includes(letter)) {
       const newArr = exclusions.filter(char => char!==letter)
       setExclusions([...newArr])
+      localStorage.setItem('exclusions', JSON.stringify(newArr))
     }
     else {
       const newArr = [...exclusions]
       newArr.push(letter)
       setExclusions([...newArr])
+      localStorage.setItem('exclusions', JSON.stringify(newArr))
     }
   }
 
   return (
     <div id='letter'>
       <span className='display'>{firstLetter}</span>
-      <button id='reroll' onClick={() => setFirstLetter(randomLetter())}/>
+      <button id='reroll' onClick={() => setFirstLetter(randomLetter())}>↻</button>
       <div id='exclusions'>
         {alphabet.map((letter) => {
           const classes = `letter ${exclusions.includes(letter) ? 'excluded' : ''}`
