@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/scattergories/static/css/main.5f8969ac.css",
+    "main.js": "/scattergories/static/js/main.ba88b334.js",
+    "static/media/categories.txt": "/scattergories/static/media/categories.06de3a49398eb310a800.txt",
+    "index.html": "/scattergories/index.html",
+    "main.5f8969ac.css.map": "/scattergories/static/css/main.5f8969ac.css.map",
+    "main.ba88b334.js.map": "/scattergories/static/js/main.ba88b334.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5f8969ac.css",
+    "static/js/main.ba88b334.js"
+  ]
+}
