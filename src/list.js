@@ -38,19 +38,21 @@ export default function List(props) {
 
   return (
     <div id='list-container'>
-      <div id='quantity-display'>
-        <span id='quantity'>{categoryCount}</span>
-        <div className='incrementers'>
-          <button disabled={props.playing || categoryCount < 6} onClick={() => setCategoryCount(categoryCount - 1)}>-</button>
-          <button disabled={props.playing || categoryCount > 19} onClick={() => setCategoryCount(categoryCount + 1)}>+</button>
-        </div>
-      </div>
       <div id='list'>
         {categoryList.map((category) => 
           <p>{category}</p>
         )}
       </div>
-      <button onClick={() => setCategoryList([])} />
+      <div id='list-controls'>
+        <div id='quantity-display'>
+          <span id='quantity'>{categoryCount}</span>
+          <div className='incrementers'>
+            <button disabled={props.playing || categoryCount < 6} onClick={() => setCategoryCount(categoryCount - 1)}>-</button>
+            <button disabled={props.playing || categoryCount > 15} onClick={() => setCategoryCount(categoryCount + 1)}>+</button>
+          </div>
+        </div>
+        <button className='reroll' onClick={() => setCategoryList([])}>↻</button>
+      </div>
     </div>
   )
 }

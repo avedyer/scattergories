@@ -55,7 +55,7 @@ export default function Letter() {
   return (
     <div id='letter'>
       <span className='display'>{firstLetter}</span>
-      <button id='reroll' onClick={() => setFirstLetter(randomLetter())}>↻</button>
+      <button className='reroll' onClick={() => setFirstLetter(randomLetter())}>↻</button>
       <div id='exclusions'>
         {alphabet.map((letter) => {
           const classes = `letter ${exclusions.includes(letter) ? 'excluded' : ''}`

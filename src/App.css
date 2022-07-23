@@ -15,11 +15,26 @@ button {
   border: none;
   box-shadow: none;
   cursor: pointer;
-  font-size: 22px;
 }
 
-button:hover {
-  text-decoration: underline;
+input {
+  border: none;
+  -webkit-appearance: none;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0px;
+}
+
+input:focus {
+  outline: none;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button:disabled:hover {
+  text-decoration: none;
 }
 
 .App {
@@ -57,7 +72,7 @@ footer {
 
 #letter .display {
   font-family: 'Cousine';
-  font-size: 128px;
+  font-size: 192px;
   margin: 12px;
 }
 
@@ -78,16 +93,156 @@ footer {
   color: hsl(0, 0%, 80%)
 }
 
-#reroll {
-  font-size: 64px;
+#letter .reroll {
   position: absolute;
   right: 12px;
 }
 
+.reroll {
+  font-size: 64px;
+}
+
 #timer {
   grid-area: timer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#timer > * {
+  width: 50%;
+}
+
+#timer .display {
+  font-size: 92px;
+}
+
+#timer input {
+  font-size: 92px;
+  width: 256px;
+}
+
+#timer button {
+  width: 50%;
+ font-size: 48px;
 }
 
 #categories {
   grid-area: categories;
+  padding: 12px;
+}
+
+.tabs {
+  height: 64px;
+  border-bottom: 2px solid black;
+}
+
+.tabs > button {
+  margin-right: 16px;
+  font-size: 32px;
+}
+
+.tabs > button:hover {
+  text-decoration: underline;
+}
+
+#list-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 16px;
+  height: 90%;
+}
+
+#list {
+  width: 40%;
+  border-right: 2px solid black;
+  height: 100%;
+}
+
+#list p {
+  margin: 16px;
+}
+
+#list-controls {
+  width: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 16px;
+}
+
+#quantity-display {
+  font-size: 48px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 92px;
+}
+
+#quantity-display .incrementers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#quantity-display button {
+  font-size: 32px;
+}
+
+
+#editing-container {
+  margin: 16px;
+  height: 90%;
+  position: relative;
+}
+
+#editing-container button {
+  font-size: 22px;
+}
+
+#category-form {
+  height: 30px;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 48px;
+  border-bottom: 2px solid black;
+}
+
+#category-form input {
+  width: 80%;
+}
+
+#full-list {
+  margin-top: 16px;
+  height: calc(100% - 64px);
+  width: 50%;
+  overflow-y: scroll;
+}
+
+#editing-container .save {
+  position: absolute;
+  top: 0;
+  left: calc(50% + 64px)
+}
+
+.category-container {
+  height: 48px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.category-container:hover {
+  border-bottom: 1px solid black;
+}
+
+.category-container button {
+  font-size: 16px;
+  text-align: right;
 }

@@ -14,18 +14,20 @@ export default function Editor(props) {
   return (
     <div id='editing-container'>
       <div id='category-form'>
-        <input type='text' onKeyUp={(e) => checkSubmit(e)} onChange={(e) => setNewCategory(e.target.value)}/>
+        <input type='text' placeholder="Add a category" onKeyUp={(e) => checkSubmit(e)} onChange={(e) => setNewCategory(e.target.value)}/>
         <button onClick={() => props.passNewCategory(newCategory)}>Add</button>
       </div>
-      <button onClick={() => props.passEditing(false)}>Save</button>
+      <button onClick={() => props.passEditing(false)} className='save'>Save</button>
+      <div id='full-list'>
       {
         props.fullList.map((category) => 
           <div className='category-container'>
-            <p>{category}</p>
-            <button onClick={() => props.passRemovedCategory(category)}>-</button>
+            <span>{category}</span>
+            <button onClick={() => props.passRemovedCategory(category)}>Remove</button>
           </div>
         )
       }
+      </div>
     </div>
   )
 }
