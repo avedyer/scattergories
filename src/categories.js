@@ -74,7 +74,7 @@ export default function Categories(props) {
         editing ?
         <Editor fullList={fullList} passEditing={setEditing} passRemovedCategory={removeCategory} passNewCategory={addCategory}/>
         :
-        <List playing={props.playing} fullList={fullList} />
+        <List completed={props.completed} playing={props.playing} fullList={fullList} />
       }
     </div>
   )

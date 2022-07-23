@@ -6,6 +6,16 @@ export default function List(props) {
   
   const [categoryList, setCategoryList] = useState([])
   const [categoryCount, setCategoryCount] = useState(10)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    if (props.playing || props.completed) {
+      setVisible(true)
+    }
+    else {
+      setVisible(false)
+    }
+  }, [props.playing, props.completed])
 
   useEffect(() => {
     if (categoryList.length < categoryCount && props.fullList.length > 0) {
@@ -40,7 +50,7 @@ export default function List(props) {
     <div id='list-container'>
       <div id='list'>
         {categoryList.map((category) => 
-          <p>{category}</p>
+          <p className={visible ? '' : 'hidden'}>{category}</p>
         )}
       </div>
       <div id='list-controls'>

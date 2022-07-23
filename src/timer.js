@@ -40,6 +40,7 @@ export default function Timer(props) {
   useEffect(() => {
     if (time === 0) {
       setPlaying(false)
+      props.passCompleted(true)
     }
   }, [time])
 
@@ -67,6 +68,9 @@ export default function Timer(props) {
     props.passPlaying(playing)
     if (time === 0 && playing) {
       setTime(defaultTime)
+    }
+    if (playing) {
+      props.passCompleted(false)
     }
   }, [playing])
 
