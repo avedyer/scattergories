@@ -8,7 +8,7 @@ export default function Letter() {
   const [firstLetter, setFirstLetter] = useState()
 
   useEffect(() => {
-    if (exclusions.length === 0 && JSON.parse(localStorage.getItem('exclusions')).length > 0) {
+    if (exclusions.length === 0 && localStorage.getItem('exclusions')) {
       setExclusions(JSON.parse(localStorage.getItem('exclusions')))
     }
   }, [exclusions])
