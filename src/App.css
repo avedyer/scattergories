@@ -84,12 +84,12 @@ footer {
 }
 
 #letter #exclusions > * {
+  font-size: 24px;
   margin: 4px;
   cursor: pointer;
 }
 
 .excluded {
-  text-decoration: line-through;
   color: hsl(0, 0%, 80%)
 }
 

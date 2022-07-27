@@ -12,7 +12,7 @@ export default function Game() {
 
   return (
     <main>
-      <Letter />
+      <Letter playing={playing}/>
       <Timer listEditing={listEditing} passCompleted={setCompleted} passPlaying={setPlaying}/> 
       <Categories completed={completed} playing={playing} passEditing={setListEditing}/>
     </main>

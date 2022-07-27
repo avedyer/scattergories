@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-export default function Letter() {
+export default function Letter(props) {
 
   const alphabet = Array.from(Array(26)).map((e, i) => i + 65).map((i) => String.fromCharCode(i));
 
@@ -34,10 +34,6 @@ export default function Letter() {
 
   function toggleExclusion(e) {
 
-    if (exclusions.length >= 25) {
-      return
-    }
-
     const letter = e.target.innerHTML
     if (exclusions.includes(letter)) {
       const newArr = exclusions.filter(char => char!==letter)
@@ -45,6 +41,9 @@ export default function Letter() {
       localStorage.setItem('exclusions', JSON.stringify(newArr))
     }
     else {
+      if (exclusions.length >= 25) {
+        return
+      }
       const newArr = [...exclusions]
       newArr.push(letter)
       setExclusions([...newArr])
@@ -55,11 +54,15 @@ export default function Letter() {
   return (
     <div id='letter'>
       <span className='display'>{firstLetter}</span>
-      <button className='reroll' onClick={() => setFirstLetter(randomLetter())}>↻</button>
+      <button className='reroll' onClick={() => {
+        if (!props.playing) {
+          setFirstLetter(randomLetter())
+        }
+      }}>↻</button>
       <div id='exclusions'>
         {alphabet.map((letter) => {
           const classes = `letter ${exclusions.includes(letter) ? 'excluded' : ''}`
-          return <div className={classes}  onClick={(e) => toggleExclusion(e)}>{letter}</div>
+          return <button className={classes} disabled={props.playing} onClick={(e) => toggleExclusion(e)}>{letter}</button>
         }
         )}
       </div>
