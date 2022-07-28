@@ -8,8 +8,8 @@ export default function Letter(props) {
   const [firstLetter, setFirstLetter] = useState()
 
   useEffect(() => {
-    if (exclusions.length === 0 && localStorage.getItem('exclusions')) {
-      setExclusions(JSON.parse(localStorage.getItem('exclusions')))
+    if (exclusions.length === 0 && localStorage.getItem('excludedLetters')) {
+      setExclusions(JSON.parse(localStorage.getItem('excludedLetters')))
     }
   }, [exclusions])
 
@@ -38,7 +38,7 @@ export default function Letter(props) {
     if (exclusions.includes(letter)) {
       const newArr = exclusions.filter(char => char!==letter)
       setExclusions([...newArr])
-      localStorage.setItem('exclusions', JSON.stringify(newArr))
+      localStorage.setItem('excludedLetters', JSON.stringify(newArr))
     }
     else {
       if (exclusions.length >= 25) {
@@ -47,7 +47,7 @@ export default function Letter(props) {
       const newArr = [...exclusions]
       newArr.push(letter)
       setExclusions([...newArr])
-      localStorage.setItem('exclusions', JSON.stringify(newArr))
+      localStorage.setItem('excludedLetters', JSON.stringify(newArr))
     }
   }
 

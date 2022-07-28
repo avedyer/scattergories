@@ -37,6 +37,12 @@ button:disabled:hover {
   text-decoration: none;
 }
 
+p > button {
+  font-size: inherit;
+  text-decoration: underline;
+  padding: 0px;
+}
+
 .App {
   padding: 16px 48px;
   display: grid;

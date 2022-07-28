@@ -18,12 +18,16 @@ export default function Editor(props) {
         <button onClick={() => props.passNewCategory(newCategory)}>Add</button>
       </div>
       <button onClick={() => props.passEditing(false)} className='save'>Save</button>
+      <button onClick={() => props.clearList()}>Clear</button>
+      <button onClick={() => props.passReset()}>Reset</button>
       <div id='full-list'>
       {
         props.fullList.map((category) => 
           <div className='category-container'>
-            <span>{category}</span>
-            <button onClick={() => props.passRemovedCategory(category)}>Remove</button>
+            <span className={props.exclusions.includes(category) ? 'excluded' : ''}>{category}</span>
+            <button onClick={() => props.passExcludedCategory(category)}>{
+              props.exclusions.includes(category) ? 'Enable' : 'Disable'
+            }</button>
           </div>
         )
       }
