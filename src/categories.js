@@ -44,7 +44,7 @@ export default function Categories(props) {
 
   useEffect(() => {
     if (exclusions.length === 0) {
-      if (localStorage.getItem('excludedCategories').length > 0) {
+      if (localStorage.getItem('excludedCategories') && localStorage.getItem('excludedCategories').length > 0)  {
         setExclusions(JSON.parse(localStorage.getItem('excludedCategories')))
       }
     }
@@ -103,12 +103,16 @@ export default function Categories(props) {
   function resetList() {
     setInitialized(false)
     setFullList([])
+    setExclusions([])
     localStorage.removeItem('categories')
+    localStorage.removeItem('excludedCategories')
   }
 
   function clearList() {
     setFullList([])
+    setExclusions([])
     localStorage.setItem('categories', JSON.stringify([]))
+    localStorage.setItem('excludedCategories', JSON.stringify([]))
   }
  
   return (
