@@ -67,7 +67,7 @@ export default function List(props) {
             <button disabled={props.playing || categoryCount > 15 || categoryCount >= props.fullList.length} onClick={() => setCategoryCount(categoryCount + 1)}>+</button>
           </div>
         </div>
-        <button disabled={props.playing} className='reroll' onClick={() => setCategoryList([])}>↻
+        <button disabled={props.playing} className='reroll' onClick={() => {setCategoryList([]); setVisible(false)}}>↻
         </button>
       </div>
     </div>

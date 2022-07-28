@@ -138,7 +138,15 @@ footer {
 
 #categories {
   grid-area: categories;
+  display: grid;
+  grid-template-rows: 64px 1fr;
+  grid-template-rows: minmax(1fr, 0) 64px;
   padding: 12px;
+  overflow-y: hidden;
+}
+
+#list {
+  border-right: 2px solid black
 }
 
 .tabs {
@@ -156,17 +164,15 @@ footer {
 }
 
 #list-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin: 16px;
-  height: 90%;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  max-height: 100%;
+  overflow-y: scroll;
 }
 
 #list {
-  width: 40%;
-  border-right: 2px solid black;
-  height: 100%;
+  max-height: 100%;
+  overflow-y: scroll;
 }
 
 #list p {
@@ -203,11 +209,19 @@ footer {
   font-size: 32px;
 }
 
+#quantity {
+  width: 55px;
+}
 
 #editing-container {
   margin: 16px;
   height: 90%;
   position: relative;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 64px 1fr;
+  height: 100%;
+  overflow-y: hidden;
 }
 
 #editing-container button {
@@ -216,7 +230,7 @@ footer {
 
 #category-form {
   height: 30px;
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -230,8 +244,8 @@ footer {
 
 #full-list {
   margin-top: 16px;
-  height: calc(100% - 64px);
-  width: 50%;
+  height: calc(100% - 32px);
+  width: 100%;
   overflow-y: scroll;
 }
 
@@ -256,4 +270,14 @@ footer {
 .category-container button {
   font-size: 16px;
   text-align: right;
+}
+
+#category-buttons {
+  display: flex;
+  flex-direction: column;
+  height: 128px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-left: 64px;
+  padding-top: 64px;
 }
