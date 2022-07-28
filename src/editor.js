@@ -17,9 +17,11 @@ export default function Editor(props) {
         <input type='text' placeholder="Add a category" onKeyUp={(e) => checkSubmit(e)} onChange={(e) => setNewCategory(e.target.value)}/>
         <button onClick={() => props.passNewCategory(newCategory)}>Add</button>
       </div>
-      <button onClick={() => props.passEditing(false)} className='save'>Save</button>
-      <button onClick={() => props.clearList()}>Clear</button>
-      <button onClick={() => props.passReset()}>Reset</button>
+      <div id='category-buttons'>
+        <button onClick={() => props.passEditing(false)}>Save</button>
+        <button onClick={() => props.clearList()}>Clear</button>
+        <button onClick={() => props.passReset()}>Reset</button>
+      </div>
       <div id='full-list'>
       {
         props.fullList.map((category) => 
