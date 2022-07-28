@@ -87,6 +87,8 @@ footer {
   flex-wrap: wrap;
   position: absolute;
   bottom: 12px;
+  right: 12px;
+  width: calc(100% - 216px);
 }
 
 #letter #exclusions > * {
