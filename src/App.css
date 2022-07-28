@@ -86,9 +86,10 @@ footer {
   display: flex;
   flex-wrap: wrap;
   position: absolute;
+  justify-content: flex-end;
   bottom: 12px;
   right: 12px;
-  width: calc(100% - 216px);
+  width: calc(100% - 144px);
 }
 
 #letter #exclusions > * {
@@ -148,7 +149,9 @@ footer {
 }
 
 #list {
-  border-right: 2px solid black
+  border-right: 2px solid black;
+  max-height: 100%;
+  overflow-y: scroll;
 }
 
 .tabs {
@@ -172,13 +175,8 @@ footer {
   overflow-y: scroll;
 }
 
-#list {
-  max-height: 100%;
-  overflow-y: scroll;
-}
-
 #list p {
-  margin: 16px;
+  margin: 8px;
 }
 
 .hidden {
