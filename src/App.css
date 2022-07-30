@@ -15,6 +15,7 @@ button {
   border: none;
   box-shadow: none;
   cursor: pointer;
+  color: inherit;
 }
 
 input {
@@ -54,7 +55,7 @@ p > button {
 }
 
 main > * {
-  border: 3px solid black;
+  border: 3px solid;
 }
 
 main {
@@ -99,7 +100,7 @@ footer {
 }
 
 .excluded {
-  color: hsl(0, 0%, 80%)
+  opacity: 80%;
 }
 
 #letter .reroll {
@@ -149,14 +150,14 @@ footer {
 }
 
 #list {
-  border-right: 2px solid black;
+  border-right: 2px solid;
   max-height: 100%;
   overflow-y: scroll;
 }
 
 .tabs {
   height: 64px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid;
 }
 
 .tabs > button {
@@ -235,7 +236,7 @@ footer {
   justify-content: space-between;
   align-items: flex-start;
   height: 48px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px;
 }
 
 #category-form input {
@@ -264,7 +265,7 @@ footer {
 }
 
 .category-container:hover {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid;
 }
 
 .category-container button {
