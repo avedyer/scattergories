@@ -20,10 +20,6 @@ export default function Letter(props) {
   }, [])
 
   function randomLetter() {
-    if (exclusions.length >= 25) {
-      return firstLetter
-    }
-
     let newLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
     
     if (exclusions.includes(newLetter) || newLetter === firstLetter) {

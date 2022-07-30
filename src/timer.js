@@ -76,7 +76,7 @@ export default function Timer(props) {
 
   function updateTime(e) {
     const re = /^[0-9\b]+$/;
-    if (re.test(e.target.value) && e.target.value.length < 4 || !e.target.value) {
+    if (re.test(e.target.value) && e.target.value.length < 4 && e.target.value > 0 || !e.target.value) {
       setTimeInput(e.target.value)
     }
   }
@@ -110,11 +110,11 @@ export default function Timer(props) {
       </span>
       }
       <div className='incrementers'>
-        <button disabled={playing || time === 1} 
+        <button disabled={playing || time < 2} 
           onClick={() => setDefaultTime(time - 1)}>
           -
         </button>
-        <button disabled={playing || time === 1} 
+        <button disabled={playing || time > 998} 
           onClick={() => setDefaultTime(time + 1)}>
           +
         </button>
