@@ -43,33 +43,17 @@ export default function Categories(props) {
   }, [fullList])
 
   useEffect(() => {
-    if (exclusions.length === 0) {
-      if (localStorage.getItem('excludedCategories') && localStorage.getItem('excludedCategories').length > 0)  {
-        setExclusions(JSON.parse(localStorage.getItem('excludedCategories')))
-      }
-    }
-    else {
+    if (initialized) {
       localStorage.setItem('excludedCategories', JSON.stringify(exclusions))
-
-      let newArr = [...fullList]
-      newArr.sort((a, b) => {
-        if (exclusions.includes(a)) {
-          if (exclusions.includes(b)) {
-            return 0
-          }
-          return 1
-        }
-        return -1
-      })
-
-      setFullList([...newArr])
     }
-
   }, [exclusions])
 
   useEffect(() => {
     if (initialized) {
       localStorage.setItem('categories', JSON.stringify(fullList))
+      if (localStorage.getItem('excludedCategories') && localStorage.getItem('excludedCategories').length > 0)  {
+        setExclusions(JSON.parse(localStorage.getItem('excludedCategories')))
+      }
     } 
     else if (fullList.length > 0) {
       setInitialized(true)
