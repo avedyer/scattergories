@@ -44,6 +44,10 @@ p > button {
   padding: 0px;
 }
 
+.reroll {
+  font-size: 64px;
+}
+
 .App {
   padding: 16px 48px;
   display: grid;
@@ -52,10 +56,6 @@ p > button {
 
 .App > * {
   width: 100%;
-}
-
-main > * {
-  border: 3px solid;
 }
 
 main {
@@ -68,217 +68,296 @@ main {
   "timer categories";
 }
 
-footer {
-  height: 86px;
+main > * {
+  border: 3px solid;
 }
 
-#letter {
-  grid-area: letter;
-  position: relative;
-}
+  #letter {
+    grid-area: letter;
+    position: relative;
+  }
 
-#letter .display {
-  font-family: 'Cousine';
-  font-size: 192px;
-  margin: 12px;
-}
+    #letter .display {
+      font-family: 'Cousine';
+      font-size: 192px;
+      margin: 12px;
+    }
 
-#letter #exclusions {
-  display: flex;
-  flex-wrap: wrap;
-  position: absolute;
-  justify-content: flex-end;
-  bottom: 12px;
-  right: 12px;
-  width: calc(100% - 144px);
-}
+    #letter .reroll {
+      position: absolute;
+      right: 12px;
+    }
 
-#letter #exclusions > * {
-  font-size: 24px;
-  margin: 4px;
-  cursor: pointer;
-}
+    #letter #exclusions {
+      display: flex;
+      flex-wrap: wrap;
+      position: absolute;
+      justify-content: flex-end;
+      bottom: 12px;
+      right: 12px;
+      width: calc(100% - 144px);
+    }
 
-.excluded {
-  opacity: 80%;
-}
+      #letter #exclusions > * {
+        font-size: 24px;
+        margin: 4px;
+        cursor: pointer;
+      }
 
-#letter .reroll {
-  position: absolute;
-  right: 12px;
-}
+    .excluded {
+      opacity: 80%;
+    }
 
-.reroll {
-  font-size: 64px;
-}
+  #timer {
+    grid-area: timer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
-#timer {
-  grid-area: timer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+  #timer > * {
+    width: 50%;
+  }
 
-#timer > * {
-  width: 50%;
-}
+    #timer .display {
+      font-size: 92px;
+    }
 
-#timer .display {
-  font-size: 92px;
-}
+    #timer input {
+      font-size: 92px;
+      width: 256px;
+      text-align: center;
+    }
 
-#timer input {
-  font-size: 92px;
-  width: 256px;
-  text-align: center;
-}
+    #timer button {
+      width: 50%;
+    font-size: 48px;
+    }
 
-#timer button {
-  width: 50%;
- font-size: 48px;
-}
+  #categories {
+    grid-area: categories;
+    display: grid;
+    grid-template-rows: 64px 1fr;
+    grid-template-rows: minmax(1fr, 0) 64px;
+    padding: 12px;
+    overflow-y: hidden;
+  }
 
-#categories {
-  grid-area: categories;
-  display: grid;
-  grid-template-rows: 64px 1fr;
-  grid-template-rows: minmax(1fr, 0) 64px;
-  padding: 12px;
-  overflow-y: hidden;
-}
+    .tabs {
+      height: 64px;
+      border-bottom: 2px solid;
+    }
 
-#list {
-  border-right: 2px solid;
-  max-height: 100%;
-  overflow-y: scroll;
-}
+      .tabs > button {
+        margin-right: 16px;
+        font-size: 32px;
+      }
 
-.tabs {
-  height: 64px;
-  border-bottom: 2px solid;
-}
+      .tabs > button:hover {
+        text-decoration: underline;
+      }
 
-.tabs > button {
-  margin-right: 16px;
-  font-size: 32px;
-}
+    #list-container {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      max-height: 100%;
+      overflow-y: scroll;
+    }
 
-.tabs > button:hover {
-  text-decoration: underline;
-}
+      #list {
+        border-right: 2px solid;
+        max-height: 100%;
+        overflow-y: scroll;
+      }
 
-#list-container {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  max-height: 100%;
-  overflow-y: scroll;
-}
+        #list p {
+          margin: 8px;
+        }
 
-#list p {
-  margin: 8px;
-}
+        .hidden {
+          background-color: black;
+        }
 
-.hidden {
-  background-color: black;
-}
+      #list-controls {
+        width: 108px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 16px;
+      }
 
-#list-controls {
-  width: 108px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 16px;
-}
+        #quantity-display {
+          font-size: 48px;
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          width: 92px;
+        }
 
-#quantity-display {
-  font-size: 48px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 92px;
-}
+          #quantity {
+            width: 55px;
+          }
 
-#quantity-display .incrementers {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+          #quantity-display .incrementers {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
 
-#quantity-display button {
-  font-size: 32px;
-}
+          #quantity-display button {
+            font-size: 32px;
+          }
 
-#quantity {
-  width: 55px;
-}
+    #editing-container {
+      margin: 16px;
+      height: 90%;
+      position: relative;
+      display: grid;
+      grid-template-columns: 60% 40%;
+      grid-template-rows: 64px 1fr;
+      height: 100%;
+      overflow-y: hidden;
+    }
 
-#editing-container {
-  margin: 16px;
-  height: 90%;
-  position: relative;
-  display: grid;
-  grid-template-columns: 60% 40%;
-  grid-template-rows: 64px 1fr;
-  height: 100%;
-  overflow-y: hidden;
-}
+      #editing-container button {
+        font-size: 22px;
+      }
 
-#editing-container button {
-  font-size: 22px;
-}
+      #category-form {
+        height: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        height: 48px;
+        border-bottom: 2px;
+      }
 
-#category-form {
-  height: 30px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  height: 48px;
-  border-bottom: 2px;
-}
+        #category-form input {
+          width: 80%;
+        }
 
-#category-form input {
-  width: 80%;
-}
+      #full-list {
+        margin-top: 16px;
+        height: calc(100% - 32px);
+        width: 100%;
+        overflow-y: scroll;
+      }
 
-#full-list {
-  margin-top: 16px;
-  height: calc(100% - 32px);
-  width: 100%;
-  overflow-y: scroll;
-}
+        .category-container {
+          height: 48px;
+          width: 90%;
+          display: flex;
+          justify-content: space-between;
+          box-sizing: border-box;
+        }
 
-#editing-container .save {
-  position: absolute;
-  top: 0;
-  left: calc(50% + 64px)
-}
+        .category-container:hover {
+          border-bottom: 1px solid;
+        }
+      
+          .category-container button {
+            font-size: 16px;
+            text-align: right;
+          }
 
-.category-container {
-  height: 48px;
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
+      #category-buttons {
+        display: flex;
+        flex-direction: column;
+        height: 128px;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-left: 64px;
+        padding-top: 64px;
+      }
 
-.category-container:hover {
-  border-bottom: 1px solid;
-}
+  footer {
+    height: 86px;
+  }
 
-.category-container button {
-  font-size: 16px;
-  text-align: right;
-}
+@media (max-width: 768px) {
 
-#category-buttons {
-  display: flex;
-  flex-direction: column;
-  height: 128px;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding-left: 64px;
-  padding-top: 64px;
+  .App {
+    padding: 8px;
+  }
+
+  main {
+    grid-template-rows: 260px auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "letter timer" "categories categories";
+  }
+
+  #letter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
+    grid-template-areas: "display reroll" "exclusions exclusions";
+  }
+
+  #letter .display {
+    font-size: 64px;
+    grid-area: display;
+  }
+
+  #letter .reroll {
+    grid-area: reroll;
+  }
+
+  #letter #exclusions {
+    grid-area: exclusions;
+    width: auto;
+  }
+
+  #letter #exclusions .letter {
+    font-size: 20px;
+    margin: 3px;
+  }
+
+  #timer .display{
+    font-size: 64px;
+  }
+
+  #timer > *, #timer button {
+    width: auto;
+  }
+
+  #timer .incrementers {
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  footer {
+    height: 36px;
+  }
+
+  #categories {
+    padding: 6px;
+    grid-template-rows: 36px auto;
+  }
+
+  #categories .tabs {
+    height: 30px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  #categories .tabs > button {
+    font-size: 24px;
+  }
+
+  #list-container {
+    grid-template-columns: 70% 30%;
+  }
+
+  #list p {
+    font-size: 18px;
+  }
+
+  #list-controls {
+    width: auto;
+    margin: 0;
+  }
 }
