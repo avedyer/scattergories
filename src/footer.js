@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react"
 
-export default function Footer() {
+import { ReactComponent as Sun } from "./imgs/sun.svg"
+import { ReactComponent as Moon } from "./imgs/moon.svg"
 
-  const [index, setIndex] = useState(0)
-  const [newIndex, setNewIndex] = useState(0)
-  const [inverted, setInverted] = useState(false)
-  const [palette, setPalette] = useState()
+export default function Footer(props) {
 
   const palettes = [
     {p: '#000000', s: '#ffffff'}, 
@@ -18,8 +16,13 @@ export default function Footer() {
     {p: '#49DCB1', s: '#EEB868'}, 
     {p: '#114B5F', s: '#F45B69'}, 
     {p: '#E9B872', s: '#6494AA'},
-    {p: '#f33bee', s: '#3b82f3'}
+    {p: '#f33b33', s: '#3b82f3'}
   ]
+
+  const [index, setIndex] = useState(0)
+  const [newIndex, setNewIndex] = useState(0)
+  const [inverted, setInverted] = useState(false)
+  const [palette, setPalette] = useState(palettes[0])
 
   useEffect(() => {
     if (newIndex < 0) {
@@ -49,15 +52,31 @@ export default function Footer() {
       node.style.color = palette.p;
       node.style.borderColor = palette.p
       node.style.backgroundColor = palette.s
+
+      props.passPalette(palette)
     }
   }, [palette])
 
   return (
     <footer>
       <div id='color-switcher'>
-        <button onClick={() => setNewIndex(index - 1)}>/</button>
-        <button onClick={() => setNewIndex(index + 1)}>\</button>
-        <button onClick={() => setInverted(!inverted)} style={{color: palette ? palette.p : 'black'}}>invert</button>
+        <button onClick={() => setNewIndex(index - 1)}>
+          <svg fill={palette.p} className='arrow'>
+            <polygon points="0,12  24,0 24,24" class="triangle" />
+          </svg>
+        </button>
+        <button onClick={() => setInverted(!inverted)} style={{color: palette ? palette.p : 'black'}}>
+          {inverted ?
+           <Moon fill={palette.p} id='day-night-icon'/>
+           :
+           <Sun fill={palette.p} id='day-night-icon'/>
+          }
+        </button>
+        <button onClick={() => setNewIndex(index + 1)}>
+          <svg fill={palette.p} className='arrow'>
+            <polygon points="0,0  0,24 24,12" class="triangle" />
+          </svg>
+        </button>
       </div>
     </footer>
   )

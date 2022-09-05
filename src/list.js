@@ -6,6 +6,8 @@ export default function List(props) {
   const [categoryList, setCategoryList] = useState([])
   const [categoryCount, setCategoryCount] = useState()
   const [visible, setVisible] = useState(false)
+  const [listLoaded, setListLoaded] = useState(false)
+  const [timeoutArray, setTimeoutArray] = useState([])
 
   useEffect(() => {
     if (props.playing || props.completed) {
@@ -39,6 +41,58 @@ export default function List(props) {
     
   }, [categoryCount])
 
+  useEffect(() => {
+    setListLoaded(document.querySelectorAll('.category').length === categoryCount)
+  }, [document.querySelectorAll('.category')])
+
+  useEffect(() => {
+    if (props.palette && listLoaded) {
+      if (visible) {
+        document.querySelectorAll('.category').forEach(category => category.style.backgroundColor = 'inherit')
+      }
+      else {
+        document.querySelectorAll('.category').forEach(category => category.style.backgroundColor = props.palette.p)
+      }
+    }
+  }, [props.palette, listLoaded])
+
+  useEffect(() => {
+    timeoutArray.forEach(timeout => clearTimeout(timeout))
+    setTimeoutArray([])
+  }, [props.palette, visible])
+
+  useEffect(() => {
+    let categoryNodeList = document.querySelectorAll('.category')
+
+    function changeBackground(node, color) {
+      node.style.backgroundColor = color
+    }
+
+    if (listLoaded) {
+
+      setTimeoutArray([])
+
+      let newArr = []
+
+      if (visible) {
+        for (let i=0; i<categoryNodeList.length; ++i) {
+          const newTimeout = setTimeout(() => changeBackground(categoryNodeList[i], 'inherit'), i*75)
+          newArr.push(newTimeout)
+        }
+      }
+      else {
+        for (let i=0; i<categoryNodeList.length; ++i) {
+          const newTimeout = setTimeout(() => changeBackground(categoryNodeList[i], props.palette.p), i*75)
+          newArr.push(newTimeout)
+        }
+      }
+
+      setTimeoutArray([...newArr])
+    }
+
+  }, [visible])
+
+
   function randomCategory() {
 
     let newCategory = props.fullList[Math.floor(Math.random() * props.fullList.length)]
@@ -56,7 +110,7 @@ export default function List(props) {
         categoryList.length === 0 ?
         <p id='list-error'>No categories to be found. Add some <button onClick={() => props.passEditing(true)}>here</button>.</p>
         :
-        categoryList.map((category, index) => <p className={visible ? '' : 'hidden'}>{`${index + 1}: ${category}`}</p>)
+        categoryList.map((category, index) => <p style = {listLoaded ? {} : {backgroundColor: 'black'}} className='category'>{`${index + 1}: ${listLoaded ? category : ''}`}</p>)
       }
       </div>
       <div id='list-controls'>

@@ -109,7 +109,7 @@ export default function Categories(props) {
         editing ?
         <Editor fullList={fullList} exclusions={exclusions} passEditing={setEditing} passExcludedCategory={toggleExclusion} passNewCategory={addCategory} clearList={clearList} passReset={resetList}/>
         :
-        <List completed={props.completed} playing={props.playing} fullList={fullList} exclusions={exclusions} passEditing={setEditing}/>
+        <List completed={props.completed} playing={props.playing} fullList={fullList} exclusions={exclusions} passEditing={setEditing} palette={props.palette}/>
       }
     </div>
   )
