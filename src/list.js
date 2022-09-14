@@ -42,17 +42,15 @@ export default function List(props) {
   }, [categoryCount])
 
   useEffect(() => {
-    setListLoaded(document.querySelectorAll('.category').length === categoryCount)
-  }, [document.querySelectorAll('.category')])
+    setListLoaded(document.querySelectorAll('.category-cover').length === categoryCount)
+  }, [document.querySelectorAll('.category-cover')])
 
   useEffect(() => {
     if (props.palette && listLoaded) {
-      if (visible) {
-        document.querySelectorAll('.category').forEach(category => category.style.backgroundColor = 'inherit')
-      }
-      else {
-        document.querySelectorAll('.category').forEach(category => category.style.backgroundColor = props.palette.p)
-      }
+      document.querySelectorAll('.category-cover').forEach(category => {
+        category.style.backgroundColor = props.palette.p
+        changeBackground(category)
+      })
     }
   }, [props.palette, listLoaded])
 
@@ -62,11 +60,7 @@ export default function List(props) {
   }, [props.palette, visible])
 
   useEffect(() => {
-    let categoryNodeList = document.querySelectorAll('.category')
-
-    function changeBackground(node, color) {
-      node.style.backgroundColor = color
-    }
+    let categoryNodeList = document.querySelectorAll('.category-cover')
 
     if (listLoaded) {
 
@@ -76,13 +70,13 @@ export default function List(props) {
 
       if (visible) {
         for (let i=0; i<categoryNodeList.length; ++i) {
-          const newTimeout = setTimeout(() => changeBackground(categoryNodeList[i], 'inherit'), i*75)
+          const newTimeout = setTimeout(() => changeBackground(categoryNodeList[i]), i*50)
           newArr.push(newTimeout)
         }
       }
       else {
         for (let i=0; i<categoryNodeList.length; ++i) {
-          const newTimeout = setTimeout(() => changeBackground(categoryNodeList[i], props.palette.p), i*75)
+          const newTimeout = setTimeout(() => changeBackground(categoryNodeList[i]), i*50)
           newArr.push(newTimeout)
         }
       }
@@ -103,6 +97,10 @@ export default function List(props) {
     return newCategory
   }
 
+  function changeBackground(node) {
+    node.style.width = visible ? `0px` : `100%`
+  }
+
   return (
     <div id='list-container'>
       <div id='list'>
@@ -110,7 +108,13 @@ export default function List(props) {
         categoryList.length === 0 ?
         <p id='list-error'>No categories to be found. Add some <button onClick={() => props.passEditing(true)}>here</button>.</p>
         :
-        categoryList.map((category, index) => <p style = {listLoaded ? {} : {backgroundColor: 'black'}} className='category'>{`${index + 1}: ${listLoaded ? category : ''}`}</p>)
+        categoryList.map((category, index) => (
+          <div className='category-container'>
+            <div className='category-cover' style = {listLoaded ? {} : {backgroundColor: 'black'}}/>
+            <p className='category'>{`${index + 1}: ${listLoaded ? category : ''}`}</p>
+          </div>
+          )
+        )
       }
       </div>
       <div id='list-controls'>

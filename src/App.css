@@ -170,10 +170,27 @@ main > * {
         border-right: 2px solid;
         max-height: 100%;
         overflow-y: scroll;
+        margin: 8px;
       }
+
+      .category-container {
+        position: relative;
+      }
+
+        .category, .category-cover {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
 
         .category {
           margin: 8px;
+        }
+
+        .category-cover {
+          z-index: 2;
+          height: 80%;
+          transition: width 0.15s linear;
         }
 
       #list-controls {
