@@ -10,6 +10,11 @@ body, #root, .App {
   font-size: 22px;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 button {
   background: none;
   border: none;
@@ -297,6 +302,9 @@ main > * {
 
   footer {
     height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
     #color-switcher {
@@ -316,6 +324,19 @@ main > * {
       width: 30px;
       height: 30px;
     }
+    
+      #ghLogo {
+        width: 1em;
+        height: 1em;
+      }
+    
+      #ghLogo {
+        transition: transform 0.6s;
+      }
+    
+      footer span:hover #ghLogo {
+        transform: rotate(360deg);
+      }
 
 @media (max-width: 768px) {
 
@@ -397,7 +418,7 @@ main > * {
     margin: 0;
   }
 
-  #play-list .category {
+  #play-list .category, #full-list .category-container span {
     font-size: 14px;
   }
 

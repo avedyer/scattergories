@@ -8,9 +8,6 @@ export default function Timer(props) {
   const [newTime,setNewTime] = useState(time)
   const [playing, setPlaying] = useState(false)
   const [editing, setEditing] = useState(false)
-  const [automaticIncrement, setAutomaticIncrement] = useState(0)
-  const [incrementSpeed, setIncrementSpeed] = useState(1000)
-  const [longPress, setLongPress] = useState(false)
 
   useEffect(() => {
     if (playing && newTime > 0) {

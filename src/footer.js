@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 import { ReactComponent as Sun } from "./imgs/sun.svg"
 import { ReactComponent as Moon } from "./imgs/moon.svg"
 
+import Credits from "./credits"
+
 export default function Footer(props) {
 
   const palettes = [
@@ -78,6 +80,7 @@ export default function Footer(props) {
           </svg>
         </button>
       </div>
+      <Credits />
     </footer>
   )
 }
