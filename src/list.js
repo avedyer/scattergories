@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 
 
 export default function List(props) {
+
+  //Partial list used during gameplay.
   
   const [categoryList, setCategoryList] = useState([])
   const [categoryCount, setCategoryCount] = useState()
   const [visible, setVisible] = useState(false)
   const [listLoaded, setListLoaded] = useState(false)
-  const [timeoutArray, setTimeoutArray] = useState([])
+  const [timeoutArray, setTimeoutArray] = useState([]) //Array of timeout functions used for cascading reveal of list.
 
   useEffect(() => {
     if (props.playing || props.completed) {
@@ -24,6 +26,7 @@ export default function List(props) {
 
   useEffect(() => {
     if (categoryList.length < categoryCount && props.fullList.length > 0) {
+      //Randomly pick categories to fill list.
       let newArr = [...categoryList]
       newArr.push(randomCategory())
       setCategoryList([...newArr])
@@ -31,6 +34,7 @@ export default function List(props) {
   }, [props.fullList , categoryList])
 
   useEffect(() => {
+    //Remove categories when list is shortened.
     let newArr = [...categoryList]
 
     while (newArr.length > categoryCount) {
@@ -42,11 +46,13 @@ export default function List(props) {
   }, [categoryCount])
 
   useEffect(() => {
+    //Check that HTML list elements have been loaded before applying functions to them.
     setListLoaded(document.querySelectorAll('.category-cover').length === categoryCount)
   }, [document.querySelectorAll('.category-cover')])
 
   useEffect(() => {
     if (props.palette && listLoaded) {
+      //Ensure that categories are covered by correct color on initial load.
       document.querySelectorAll('.category-cover').forEach(category => {
         category.style.backgroundColor = props.palette.p
         changeBackground(category)
@@ -55,11 +61,13 @@ export default function List(props) {
   }, [props.palette, listLoaded])
 
   useEffect(() => {
+    //Clear timeout functions when visual palette changes.
     timeoutArray.forEach(timeout => clearTimeout(timeout))
     setTimeoutArray([])
   }, [props.palette, visible])
 
   useEffect(() => {
+    //Set timeout functions for cascading category covers when visibility is toggled.
     let categoryNodeList = document.querySelectorAll('.category-cover')
 
     if (listLoaded) {
@@ -68,17 +76,9 @@ export default function List(props) {
 
       let newArr = []
 
-      if (visible) {
-        for (let i=0; i<categoryNodeList.length; ++i) {
-          const newTimeout = setTimeout(() => changeBackground(categoryNodeList[i]), i*50)
-          newArr.push(newTimeout)
-        }
-      }
-      else {
-        for (let i=0; i<categoryNodeList.length; ++i) {
-          const newTimeout = setTimeout(() => changeBackground(categoryNodeList[i]), i*50)
-          newArr.push(newTimeout)
-        }
+      for (let i=0; i<categoryNodeList.length; ++i) {
+        const newTimeout = setTimeout(() => changeBackground(categoryNodeList[i]), i*50)
+        newArr.push(newTimeout)
       }
 
       setTimeoutArray([...newArr])
@@ -98,6 +98,7 @@ export default function List(props) {
   }
 
   function changeBackground(node) {
+    //Toggle style of category cover
     node.style.width = visible ? `0px` : `100%`
   }
 

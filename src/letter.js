@@ -4,8 +4,8 @@ export default function Letter(props) {
 
   const alphabet = Array.from(Array(26)).map((e, i) => i + 65).map((i) => String.fromCharCode(i));
 
-  const [exclusions, setExclusions] = useState([])
-  const [firstLetter, setFirstLetter] = useState()
+  const [exclusions, setExclusions] = useState([]) //Letters which will be excluded from randomized pick
+  const [firstLetter, setFirstLetter] = useState() //Randomized initial letter
 
   useEffect(() => {
     if (exclusions.length === 0 && localStorage.getItem('excludedLetters')) {
@@ -31,8 +31,9 @@ export default function Letter(props) {
   function toggleExclusion(e) {
 
     const letter = e.target.innerHTML
+
     if (exclusions.includes(letter)) {
-      const newArr = exclusions.filter(char => char!==letter)
+      const newArr = exclusions.filter(char => char !== letter)
       setExclusions([...newArr])
       localStorage.setItem('excludedLetters', JSON.stringify(newArr))
     }

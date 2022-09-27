@@ -2,6 +2,8 @@ import { useState } from "react"
 
 export default function Editor(props) {
 
+  //Editable list of categories. Passes actons to main Categories module for integration wtih List module used during play.
+
   const [newCategory, setNewCategory] = useState()
 
   function checkSubmit(e) {

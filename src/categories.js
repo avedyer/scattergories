@@ -7,12 +7,13 @@ import categories from './categories.txt'
 
 export default function Categories(props) {
 
-  const [editing, setEditing] = useState(false)
-  const [fullList, setFullList] = useState([])
-  const [exclusions, setExclusions] = useState([])
-  const [initialized, setInitialized] = useState(false)
+  const [editing, setEditing] = useState(false) //toggles editor/game view.
+  const [fullList, setFullList] = useState([]) //categories to be loaded from localStorage or text file.
+  const [exclusions, setExclusions] = useState([]) //exclusions to be loaded from localStorage.
+  const [initialized, setInitialized] = useState(false) //prevents loading of certain elements before a list is initialized.
 
   useEffect(() => {
+
     if (fullList.length === 0) {
       if (JSON.parse(localStorage.getItem('categories'))){
         if (JSON.parse(localStorage.getItem('categories')). length === 0) {
@@ -20,7 +21,9 @@ export default function Categories(props) {
         }
         setFullList(JSON.parse(localStorage.getItem('categories')))
       }
+
       else {
+        //load categories from text file.
         fetch(categories)
         .then(r => r.text())
         .then(text => {

@@ -6,9 +6,9 @@ import { useState } from "react"
 
 export default function Game(props) {
 
-  const [playing, setPlaying] = useState(false)
-  const [listEditing, setListEditing] = useState(false)
-  const [completed, setCompleted] = useState(false)
+  const [playing, setPlaying] = useState(false) //toggles actions when game is running.
+  const [listEditing, setListEditing] = useState(false) //toggles actions while list is being edited.
+  const [completed, setCompleted] = useState(false) //toggles actions after game is completed.
 
   return (
     <main>
