@@ -103,7 +103,7 @@ export default function List(props) {
 
   return (
     <div id='list-container'>
-      <div id='list'>
+      <div id='play-list'>
       {
         categoryList.length === 0 ?
         <p id='list-error'>No categories to be found. Add some <button onClick={() => props.passEditing(true)}>here</button>.</p>

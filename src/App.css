@@ -105,7 +105,7 @@ main > * {
       }
 
     .excluded {
-      opacity: 80%;
+      opacity: 60%;
     }
 
   #timer {
@@ -166,31 +166,36 @@ main > * {
       overflow-y: scroll;
     }
 
-      #list {
+      #play-list {
         border-right: 2px solid;
         max-height: 100%;
         overflow-y: scroll;
         margin: 8px;
+        display: flex;
+        flex-direction: column;
       }
 
-      .category-container {
+      #play-list .category-container {
         position: relative;
+        flex: 1;
+        margin: 4px;
       }
 
-        .category, .category-cover {
-          position: absolute;
-          left: 0;
-          top: 0;
+        #play-list .category {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-end;
+          font-size: 24px;
+          margin: 0;
         }
 
-        .category {
-          margin: 8px;
-        }
-
-        .category-cover {
+        #play-list .category-cover {
           z-index: 2;
-          height: 80%;
+          height: 100%;
           transition: width 0.15s linear;
+          position: absolute;
+          top: 0;
+          left: 0;
         }
 
       #list-controls {
@@ -259,21 +264,25 @@ main > * {
         overflow-y: scroll;
       }
 
-        .category-container {
-          height: 48px;
+        #full-list .category-container {
+          height: auto;
           width: 90%;
           display: flex;
           justify-content: space-between;
           box-sizing: border-box;
         }
 
-        .category-container:hover {
+        #full-list .category-container:hover {
           border-bottom: 1px solid;
         }
       
-          .category-container button {
-            font-size: 16px;
+          #full-list .category-container button {
+            font-size: 20px;
             text-align: right;
+          }
+
+          #full-list .category-container span {
+            margin: 12px 0px;
           }
 
       #category-buttons {
@@ -346,10 +355,6 @@ main > * {
     margin: 2px;
   }
 
-  #excluded {
-    opacity: 60%;
-  }
-
   #timer .display{
     font-size: 64px;
   }
@@ -387,12 +392,24 @@ main > * {
     grid-template-columns: 70% 30%;
   }
 
-  #list p {
-    font-size: 18px;
-  }
-
   #list-controls {
     width: auto;
     margin: 0;
+  }
+
+  #play-list .category {
+    font-size: 14px;
+  }
+
+  #editing-container { 
+    grid-template-columns: 80% 20%;
+  }
+
+  #category-buttons {
+    padding: 48px 0px;
+  }
+
+  #full-list .category-container span {
+    margin: 4px 0px;
   }
 }
